@@ -1086,4 +1086,42 @@ class MysqlAdapter extends PdoAdapter implements AdapterInterface
 
         return $this->fetchRow($sql);
     }
+
+
+   
+    /**
+     * Returns the approprite type of text column based on the limit
+     * specified on the column
+     * @param Column $column The column to perform the check. Assumes the column type is text and limit is specified
+     * @return string
+     */
+    protected function classifyTextColumn(Column $column) 
+    {
+        $name = '';
+   
+        // The values for the limit are based on:
+        // http://dev.mysql.com/doc/refman/5.0/en/string-type-overview.html
+        switch (true) {
+            case $column->getLimit() <= MysqlAdapter::TEXT_SMALL:
+                $name = 'tinytext';
+                break;
+            case $column->getLimit() > MysqlAdapter::TEXT_SMALL && $column->getLimit() <= MysqlAdapter::TEXT_REGULAR:
+                $name = 'text';
+                break;
+            case $column->getLimit() > MysqlAdapter::TEXT_REGULAR && $column->getLimit() <= MysqlAdapter::TEXT_MEDIUM:
+                $name = 'mediumtext';
+                break;
+            case $column->getLimit() > MysqlAdapter::TEXT_MEDIUM:
+                $name = 'longtext';
+                break;
+            default:
+                // Default to the text type
+                $name = 'text';
+                break;
+        }
+   
+        return $name;
+    }
+
+
 }
