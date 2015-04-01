@@ -55,6 +55,7 @@ interface AdapterInterface
     const PHINX_TYPE_DATE           = 'date';
     const PHINX_TYPE_BINARY         = 'binary';
     const PHINX_TYPE_BOOLEAN        = 'boolean';
+    const PHINX_TYPE_ENUM           = 'enum';
     const PHINX_TYPE_JSON           = 'json';
     const PHINX_TYPE_UUID           = 'uuid';
     const PHINX_TYPE_FILESTREAM     = 'filestream';
@@ -64,6 +65,13 @@ interface AdapterInterface
     const PHINX_TYPE_POINT          = 'point';
     const PHINX_TYPE_LINESTRING     = 'linestring';
     const PHINX_TYPE_POLYGON        = 'polygon';
+
+    // MySQL specific text types
+    const PHINX_TYPE_TINYTEXT       = 'tinytext';
+    const PHINX_TYPE_MEDIUMTEXT     = 'mediumtext';
+    const PHINX_TYPE_LONGTEXT       = 'longtext';
+
+    const PHINX_TYPE_MEDIUMINT      = 'mediumint';
 
     /**
      * Get all migrated version numbers.
